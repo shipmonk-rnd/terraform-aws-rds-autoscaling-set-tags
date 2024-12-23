@@ -1,0 +1,5 @@
+.terraform
+example/terraform*
+example/.terraform*
+example/bucket_lister/hello
+example/lambda_job/hello

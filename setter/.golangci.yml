@@ -1,0 +1,79 @@
+linters:
+
+  enable:
+    - revive # replacement for golint
+    - gofmt
+    - govet
+    - errcheck
+    - staticcheck
+    - gosimple
+    - godot
+    - gocognit
+    - goconst
+    - gocyclo
+    - misspell
+    - whitespace
+    - wsl
+    - prealloc
+    # - unconvert
+
+linters-settings:
+  revive:
+    rules:
+      - name: exported
+        severity: warning
+        disabled: false
+
+  gocognit:
+    # Minimal cognitive complexity to report
+    min-complexity: 80 # This code has cognitive complexity 21, let's check if it increases
+
+  gocyclo:
+    # Minimal code complexity to report
+    min-complexity: 21 # This code has cyclomatic complexity 21, let's check if it increases
+
+  goconst:
+    # Minimal length of string constant to check
+    min-len: 3
+    # Minimal occurrences count to trigger
+    min-occurrences: 3
+
+  misspell:
+    # Correct spellings using locale preferences
+    locale: US
+
+run:
+  # Timeout for analysis, e.g. 30s, 5m
+  timeout: 5m
+
+  # Include test files
+  tests: true
+
+  # Which dirs to skip: they won't be analyzed
+  exclude-dirs:
+
+# Coverage thresholds
+coverage:
+  status:
+    project:
+      default:
+        # Require at least 90% code coverage
+        target: 90%
+        # Allow a small decrease of coverage
+        threshold: 1%
+        # Paths to include in coverage calculation
+        paths:
+          - "internal/"
+        # Paths to exclude from coverage calculation
+        exclude:
+          - "internal/version/"
+          - "**/mock_*.go"
+          - "**/*_test.go"
+      patch:
+        default:
+          # New code must be fully covered
+          target: 100%
+          # No decrease allowed for new code
+          threshold: 0%
+          # Only check coverage of modified files
+          only-pulls: true

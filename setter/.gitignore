@@ -1,0 +1,19 @@
+# Build artifacts
+bootstrap
+
+# Test artifacts
+coverage.out
+coverage.html
+
+# Dependencies
+vendor/
+
+# IDE files
+.idea/
+.vscode/
+
+# Mac files
+.DS_Store
+
+# Debug files
+__debug_bin

@@ -160,7 +160,7 @@ func (h *Handler) HandleRequest(ctx context.Context, event events.CloudWatchEven
 	}
 
 	// Apply tags to the RDS instance.
-	arn := fmt.Sprintf("arn:aws:rds:us-east-1:%s:db:%s", *callerIdentityOutput.Account, dbInstanceID)
+	arn := fmt.Sprintf("arn:aws:rds:%s:%s:db:%s", event.Region, *callerIdentityOutput.Account, dbInstanceID)
 	_, err = h.rds.AddTagsToResource(&rds.AddTagsToResourceInput{
 		ResourceName: aws.String(arn),
 		Tags:         awsTags,

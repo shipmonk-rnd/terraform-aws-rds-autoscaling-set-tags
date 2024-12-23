@@ -134,6 +134,7 @@ func TestHandler_HandleRequest(t *testing.T) {
 			name: "non-autoscaling instance",
 			event: events.CloudWatchEvent{
 				Detail: []byte(`{"SourceIdentifier": "nibbler"}`),
+				Region: "us-east-1",
 			},
 			envVars: map[string]string{
 				"RDS_CLUSTER_IDENTIFIER": "planet-express",
@@ -148,6 +149,7 @@ func TestHandler_HandleRequest(t *testing.T) {
 			name: "sts get caller identity error",
 			event: events.CloudWatchEvent{
 				Detail: []byte(`{"SourceIdentifier": "application-autoscaling-hypnotoad"}`),
+				Region: "us-east-1",
 			},
 			envVars: map[string]string{
 				"RDS_CLUSTER_IDENTIFIER": "planet-express",
@@ -166,6 +168,7 @@ func TestHandler_HandleRequest(t *testing.T) {
 			name: "permission denied error",
 			event: events.CloudWatchEvent{
 				Detail: []byte(`{"SourceIdentifier": "application-autoscaling-fry"}`),
+				Region: "us-east-1",
 			},
 			envVars: map[string]string{
 				"RDS_CLUSTER_IDENTIFIER": "planet-express",
@@ -194,6 +197,7 @@ func TestHandler_HandleRequest(t *testing.T) {
 			name: "instance from different cluster",
 			event: events.CloudWatchEvent{
 				Detail: []byte(`{"SourceIdentifier": "application-autoscaling-mom"}`),
+				Region: "us-east-1",
 			},
 			envVars: map[string]string{
 				"RDS_CLUSTER_IDENTIFIER": "planet-express",
@@ -219,6 +223,7 @@ func TestHandler_HandleRequest(t *testing.T) {
 			name: "invalid event detail",
 			event: events.CloudWatchEvent{
 				Detail: []byte(`invalid json`),
+				Region: "us-east-1",
 			},
 			envVars: map[string]string{
 				"RDS_CLUSTER_IDENTIFIER": "planet-express",
@@ -233,6 +238,7 @@ func TestHandler_HandleRequest(t *testing.T) {
 			name: "add tags error",
 			event: events.CloudWatchEvent{
 				Detail: []byte(`{"SourceIdentifier": "application-autoscaling-zoidberg"}`),
+				Region: "us-east-1",
 			},
 			envVars: map[string]string{
 				"RDS_CLUSTER_IDENTIFIER": "planet-express",
@@ -261,6 +267,7 @@ func TestHandler_HandleRequest(t *testing.T) {
 			name: "autoscaling instance with valid cluster",
 			event: events.CloudWatchEvent{
 				Detail: []byte(`{"SourceIdentifier": "application-autoscaling-fry"}`),
+				Region: "us-east-1",
 			},
 			envVars: map[string]string{
 				"RDS_CLUSTER_IDENTIFIER": "planet-express",
@@ -275,6 +282,7 @@ func TestHandler_HandleRequest(t *testing.T) {
 			name: "autoscaling instance with invalid tags JSON",
 			event: events.CloudWatchEvent{
 				Detail: []byte(`{"SourceIdentifier": "application-autoscaling-leela"}`),
+				Region: "us-east-1",
 			},
 			envVars: map[string]string{
 				"RDS_CLUSTER_IDENTIFIER": "planet-express",
@@ -289,6 +297,7 @@ func TestHandler_HandleRequest(t *testing.T) {
 			name: "missing RDS_CLUSTER_IDENTIFIER",
 			event: events.CloudWatchEvent{
 				Detail: []byte(`{"SourceIdentifier": "application-autoscaling-amy"}`),
+				Region: "us-east-1",
 			},
 			envVars: map[string]string{
 				"RDS_CLUSTER_IDENTIFIER": "",
@@ -303,6 +312,7 @@ func TestHandler_HandleRequest(t *testing.T) {
 			name: "missing RDS_CLUSTER_IDENTIFIER environment variable",
 			event: events.CloudWatchEvent{
 				Detail: []byte(`{"SourceIdentifier": "application-autoscaling-hermes"}`),
+				Region: "us-east-1",
 			},
 			rds:     defaultMockRDS,
 			sts:     defaultMockSTS,
@@ -313,6 +323,7 @@ func TestHandler_HandleRequest(t *testing.T) {
 			name: "get cluster identifier error",
 			event: events.CloudWatchEvent{
 				Detail: []byte(`{"SourceIdentifier": "application-autoscaling-scruffy"}`),
+				Region: "us-east-1",
 			},
 			envVars: map[string]string{
 				"RDS_CLUSTER_IDENTIFIER": "planet-express",
@@ -331,6 +342,7 @@ func TestHandler_HandleRequest(t *testing.T) {
 			name: "instance from different cluster",
 			event: events.CloudWatchEvent{
 				Detail: []byte(`{"SourceIdentifier": "application-autoscaling-mom"}`),
+				Region: "us-east-1",
 			},
 			envVars: map[string]string{
 				"RDS_CLUSTER_IDENTIFIER": "planet-express",
@@ -355,6 +367,7 @@ func TestHandler_HandleRequest(t *testing.T) {
 			name: "aws api throttling error",
 			event: events.CloudWatchEvent{
 				Detail: []byte(`{"SourceIdentifier": "application-autoscaling-bender"}`),
+				Region: "us-east-1",
 			},
 			envVars: map[string]string{
 				"RDS_CLUSTER_IDENTIFIER": "planet-express",
@@ -376,6 +389,7 @@ func TestHandler_HandleRequest(t *testing.T) {
 			name: "malformed arn",
 			event: events.CloudWatchEvent{
 				Detail: []byte(`{"SourceIdentifier": "application-autoscaling-leela"}`),
+				Region: "us-east-1",
 			},
 			envVars: map[string]string{
 				"RDS_CLUSTER_IDENTIFIER": "planet-express",
@@ -393,6 +407,7 @@ func TestHandler_HandleRequest(t *testing.T) {
 			name: "missing environment variables",
 			event: events.CloudWatchEvent{
 				Detail: []byte(`{"SourceIdentifier": "application-autoscaling-zoidberg"}`),
+				Region: "us-east-1",
 			},
 			envVars: map[string]string{},
 			rds:     defaultMockRDS,
